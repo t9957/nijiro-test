@@ -1,0 +1,118 @@
+body {
+  width: 100vw;
+  height: 90vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#blind {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  animation: fadeInAnime 500ms ease 500ms forwards;
+}
+@keyframes fadeInAnime{
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+#copyright {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 28px;
+  color: #bbb;
+  font-family: "Zen Maru Gothic", serif;
+  font-size: 12px;
+  font-weight: 400;
+  font-style: normal;
+}
+
+#main {
+  position: absolute;
+  background-color: rgb(255, 255, 255);
+  color: #393939;
+  fill: #393939;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Zen Maru Gothic", serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+}
+
+#logo {
+  height: 14rem;
+}
+
+.subtitle {
+  font-family: "Zen Maru Gothic", serif;
+  font-size: 26px;
+  font-weight: 400;
+  font-style: normal;
+  margin-bottom: 10px;
+}
+
+.title {
+  font-family: "Zen Maru Gothic", serif;
+  font-size: 32px;
+  font-weight: 400;
+  font-style: normal;
+  margin-bottom: 20px;
+}
+
+.menu-words {
+  padding-bottom: 3px;
+}
+
+.open-in-new {
+ padding-right: 3px;
+}
+
+.btn-background {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color: rgb(188, 221, 247); */
+  background-color: #117f9277;
+  width: 200px;
+  height: 40px;
+  margin: 6px;
+  border-width: 1px;
+  border-style: none;
+  border-radius: 3px;
+  border-color: rgba(255, 255, 255, 0);
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-width: inherit;
+  border-style: inherit;
+  border-radius: inherit;
+  border-color: inherit;
+  transition-duration: 399ms;
+}
+.btn:hover {
+  color: #117f9277;
+  fill: #117f9277;
+  background-color: rgba(255, 255, 255, 0.555);
+}

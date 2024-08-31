@@ -116,3 +116,8 @@ body {
   fill: #117f9277;
   background-color: rgba(255, 255, 255, 0.555);
 }
+
+#content {
+  padding: 50px;
+  background-color: #e000c277;
+}

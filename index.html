@@ -16,64 +16,71 @@
   <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div id="main" class="">
-    <ul id="menu">
-      <li class="logo-title">
-        <img id="logo" src="./logo.png" alt="">
-        <p class="subtitle">訪問専門助産院</p>
-        <h1 class="title">にじいろの月</h1>
-      </li>
-      <li class="btn-background">
-        <a class="btn" href="https://lin.ee/tPI0nMQ" target="_blank" rel="noopener noreferrer">
-          <p class="menu-words open-in-new">
-            LINE
-          </p>
-          <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="inherit">
-            <path d="M216-144q-29.7 0-50.85-21.15Q144-186.3 144-216v-528q0-29.7 21.15-50.85Q186.3-816 216-816h264v72H216v528h528v-264h72v264q0 29.7-21.15 50.85Q773.7-144 744-144H216Zm171-192-51-51 357-357H576v-72h240v240h-72v-117L387-336Z"/>
-          </svg>
-        </a>
-      </li>
-      <li class="btn-background">
-        <a class="btn" href="https://instagram.com/nizitsuki" target="_blank" rel="noopener noreferrer">
-          <p class="menu-words open-in-new">
-            Instagram
-          </p>
-          <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="inherit">
-            <path d="M216-144q-29.7 0-50.85-21.15Q144-186.3 144-216v-528q0-29.7 21.15-50.85Q186.3-816 216-816h264v72H216v528h528v-264h72v264q0 29.7-21.15 50.85Q773.7-144 744-144H216Zm171-192-51-51 357-357H576v-72h240v240h-72v-117L387-336Z"/>
-          </svg>
-        </a>
-      </li>
-      <li class="btn-background">
-        <a class="btn" href="#" data-content="about.html">
-          <p class="menu-words">
-            にじいろの月について
-          </p>
-        </a>
-      </li>
-      <li class="btn-background">
-        <a class="btn" href="#" data-content="services.html">
-          <p class="menu-words">
-            サービス・料金表
-          </p>
-        </a>
-      </li>
-      <li class="btn-background">
-        <a class="btn" href="#" data-content="blog.html">
-          <p class="menu-words">
-            ブログ・お知らせ
-          </p>
-        </a>
-      </li>
-      <li class="btn-background">
-        <a class="btn" href="#" data-content="contact.html">
-          <p class="menu-words">
-            お問い合わせ
-          </p>
-        </a>
-      </li>
-      <p id="copyright">© Copyright 2023-2024 にじいろの月（niziironotsuki） All Rights Reserved.</p>
-    </ul>
-    <div id="content"></div>
+  <div class="centered">
+    <div id="main" class="">
+      <ul id="menu" data-menu-active="true">
+        <li class="logo-title">
+          <img id="logo" src="./logo.png" alt="">
+          <p class="subtitle">訪問専門助産院</p>
+          <h1 class="title">にじいろの月</h1>
+        </li>
+        <li class="btn-background">
+          <a class="btn" href="https://lin.ee/tPI0nMQ" target="_blank" rel="noopener noreferrer">
+            <p class="menu-words open-in-new">
+              LINE
+            </p>
+            <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="inherit">
+              <path d="M216-144q-29.7 0-50.85-21.15Q144-186.3 144-216v-528q0-29.7 21.15-50.85Q186.3-816 216-816h264v72H216v528h528v-264h72v264q0 29.7-21.15 50.85Q773.7-144 744-144H216Zm171-192-51-51 357-357H576v-72h240v240h-72v-117L387-336Z"/>
+            </svg>
+          </a>
+        </li>
+        <li class="btn-background">
+          <a class="btn" href="https://instagram.com/nizitsuki" target="_blank" rel="noopener noreferrer">
+            <p class="menu-words open-in-new">
+              Instagram
+            </p>
+            <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="inherit">
+              <path d="M216-144q-29.7 0-50.85-21.15Q144-186.3 144-216v-528q0-29.7 21.15-50.85Q186.3-816 216-816h264v72H216v528h528v-264h72v264q0 29.7-21.15 50.85Q773.7-144 744-144H216Zm171-192-51-51 357-357H576v-72h240v240h-72v-117L387-336Z"/>
+            </svg>
+          </a>
+        </li>
+        <li class="btn-background">
+          <a class="btn btn-event" href="#" data-content="about.html" data-btn-active="false">
+            <p class="menu-words">
+              にじいろの月について
+            </p>
+          </a>
+        </li>
+        <li class="btn-background">
+          <a class="btn btn-event" href="#" data-content="services.html" data-btn-active="false">
+            <p class="menu-words">
+              サービス・料金表
+            </p>
+          </a>
+        </li>
+        <li class="btn-background">
+          <a class="btn btn-event" href="#" data-content="blog.html" data-btn-active="false">
+            <p class="menu-words">
+              ブログ・お知らせ
+            </p>
+          </a>
+        </li>
+        <li class="btn-background">
+          <a class="btn btn-event" href="#" data-content="contact.html" data-btn-active="false">
+            <p class="menu-words">
+              お問い合わせ
+            </p>
+          </a>
+        </li>
+        <div id="copyright">
+          <p>© Copyright 2023-2024</p>
+          <p>にじいろの月（niziironotsuki）</p>
+          <p>Rights Reserved.</p>
+        </div>
+      </ul>
+      <div id="content"></div>
+      <div id="content-blind"></div>
+    </div>
   </div>
   <div id="blind"></div>
 </body>

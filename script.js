@@ -2,83 +2,114 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll("#menu .btn-event").forEach((btn) => {
     btn.addEventListener("click", function (event) {
       event.preventDefault(); // デフォルトのリンク動作を防止
-      const contentUrl = this.getAttribute("data-content"); // 対応するコンテンツファイルのURLを取得
-      const contentDiv = document.getElementById("content");
-
-      // コンテンツを非同期で読み込む
-      fetch(contentUrl)
-        .then((response) => response.text())
-        .then((data) => {
-          if (!menu.getAttribute("data-menu-active") === "true") {
-            contentOut();
-          }
-          setTimeout(() => {
-            contentDiv.innerHTML = data; // 取得したコンテンツを挿入
-          }, 390);
-          menuBtnEventAnimation(this);
-        })
-        .catch((error) => {
-          console.error("Error loading content:", error);
-          contentDiv.innerHTML = "<p>コンテンツを読み込めませんでした。</p>";
-        });
+      menuOperation(this);
     });
   });
-});
 
-function menuBtnEventAnimation(content_btn) {
-  const menu = document.getElementById("menu");
   const contentDiv = document.getElementById("content");
-  const isMenuActive = menu.getAttribute("data-menu-active") === "true";
-  const isBtnActive = content_btn.getAttribute("data-btn-active") === "true";
 
-  if (isMenuActive) {
-    // メニューがアクティブな場合
-    menu.style.animation = "none";
+  function btnAnimaRes() {
     setTimeout(() => {
-      menu.style.animation = `menuShrinkAnime 770ms cubic-bezier(.23,0,0,1) 0s forwards`;
+      document.querySelectorAll("#menu .btn-event").forEach((btn) => {
+        btn.style.animation = `none`;
+      });
     }, 50);
-    menu.setAttribute("data-menu-active", "false");
-    content_btn.setAttribute("data-btn-active", "true");
-  } else if (isBtnActive) {
-    // ボタンがアクティブな場合
-    // menu.style.animation = "none";
-    setTimeout(() => {
-      menu.style.animation = `menuEnlargeAnime 770ms cubic-bezier(.23,0,0,1) 0s forwards`;
-    }, 50);
-    contentOut();
-    contentDiv.innerHTML = "";
-    menu.setAttribute("data-menu-active", "true");
-    content_btn.setAttribute("data-btn-active", "false");
-  } else if (!isMenuActive) {
+  }
+
+  function cancelAllBtnActive() {
     document.querySelectorAll("#menu .btn-event").forEach((btn) => {
       btn.setAttribute("data-btn-active", "false");
     });
-    content_btn.setAttribute("data-btn-active", "true");
-    contentIn();
   }
-  btnAnimaRes();
-}
 
-function contentIn() {
-  const contentDiv = document.getElementById("content");
-  setTimeout(() => {
-    contentDiv.style.animation = `contentInAnime 390ms ease 0s forwards`;
-  }, 50);
-  contentDiv.style.animation = `none`;
-}
+  function menuOperation(btnEvent) {
+    const contentUrl = btnEvent.getAttribute("data-content");
+    const menu = document.getElementById("menu");
+    const isMenuActive = menu.getAttribute("data-menu-active") === "true";
+    const isBtnActive = btnEvent.getAttribute("data-btn-active") === "true";
 
-function contentOut() {
-  const contentDiv = document.getElementById("content");
-  contentDiv.style.animation = `none`;
-  setTimeout(() => {
-    contentDiv.style.animation = `contentOutAnime 390ms ease 0s forwards`;
-  }, 50);
-}
+    if (isMenuActive) {
+      openContent(contentUrl);
+      menu.setAttribute("data-menu-active", "false");
+      btnEvent.setAttribute("data-btn-active", "true");
+    } else if (isBtnActive) {
+      closeContent();
+      menu.setAttribute("data-menu-active", "true");
+      btnEvent.setAttribute("data-btn-active", "false");
+    } else if (!isMenuActive) {
+      cancelAllBtnActive();
+      btnEvent.setAttribute("data-btn-active", "true");
+      toggleContent(contentUrl);
+    }
+    btnAnimaRes();
+  }
 
-function btnAnimaRes() {
-  setTimeout(() => {
-    document.querySelectorAll("#menu .btn-event").forEach((btn) => {
-      btn.style.animation = "none";
+  function openContent(contentUrl) {
+    fetchContent(contentUrl).then((content) => {
+      contentDiv.innerHTML = content;
     });
-  }, 50);
-}
+    menu.style.animation = `none`;
+    setTimeout(() => {
+      menu.style.animation = `menuShrinkAnime 770ms cubic-bezier(.23,0,0,1) 0s forwards`;
+    }, 50);
+  }
+
+  function closeContent() {
+    setTimeout(() => {
+      menu.style.animation = `menuEnlargeAnime 770ms cubic-bezier(.23,0,0,1) 0s forwards`;
+    }, 50);
+    menu.addEventListener("animationend", function handleAnimationEnd() {
+      contentDiv.innerHTML = "";
+      contentDiv.style.animation = `none`;
+      menu.style.animation = `none`;
+      menu.removeEventListener("animationend", handleAnimationEnd);
+    });
+  }
+
+  function toggleContent(contentUrl) {
+    hideContent();
+    contentDiv.addEventListener("animationend", function handleAnimationEnd() {
+      showContent(contentUrl);
+      contentDiv.removeEventListener("animationend", handleAnimationEnd);
+    });
+  }
+
+  function showContent(contentUrl) {
+    fetchContent(contentUrl).then((content) => {
+      contentDiv.innerHTML = content;
+      contentDiv.style.animation = `contentInAnime 390ms ease 0s forwards`;
+    });
+    contentDiv.addEventListener("animationend", function handleAnimationEnd() {
+      contentDiv.style.animation = `none`;
+      contentDiv.removeEventListener("animationend", handleAnimationEnd);
+    });
+  }
+
+  function hideContent() {
+    setTimeout(() => {
+      contentDiv.style.animation = `contentOutAnime 390ms ease 0s forwards`;
+    }, 50);
+    contentDiv.addEventListener("animationend", function handleAnimationEnd() {
+      contentDiv.innerHTML = "";
+      contentDiv.style.animation = `none`;
+      contentDiv.removeEventListener("animationend", handleAnimationEnd);
+    });
+  }
+
+  function fetchContent(contentUrl) {
+    return fetch(contentUrl)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.text();
+      })
+      .then((data) => {
+        return data;
+      })
+      .catch((error) => {
+        console.error("Error loading content:", error);
+        return "<p>コンテンツを読み込めませんでした。</p>";
+      });
+  }
+});

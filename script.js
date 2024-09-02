@@ -47,16 +47,17 @@ document.addEventListener("DOMContentLoaded", function () {
   function openContent(contentUrl) {
     fetchContent(contentUrl).then((content) => {
       contentDiv.innerHTML = content;
+      // ページの内容が読み込まれてからアニメーションを開始
+      menu.style.animation = `none`;
+      setTimeout(() => {
+        menu.style.animation = `menuShrinkAnime 390ms cubic-bezier(.5,0,0,1) 0s forwards`;
+      }, 50);
     });
-    menu.style.animation = `none`;
-    setTimeout(() => {
-      menu.style.animation = `menuShrinkAnime 770ms cubic-bezier(.23,0,0,1) 0s forwards`;
-    }, 50);
   }
 
   function closeContent() {
     setTimeout(() => {
-      menu.style.animation = `menuEnlargeAnime 770ms cubic-bezier(.23,0,0,1) 0s forwards`;
+      menu.style.animation = `menuEnlargeAnime 390ms cubic-bezier(.5,0,0,1) 0s forwards`;
     }, 50);
     menu.addEventListener("animationend", function handleAnimationEnd() {
       contentDiv.innerHTML = "";
@@ -109,7 +110,13 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .catch((error) => {
         console.error("Error loading content:", error);
-        return "<p>コンテンツを読み込めませんでした。</p>";
+        const style = `
+        height: 95vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        `;
+        return `<div class="centered mjs-error" style="${style}"><p class="error-msg">error: コンテンツを読み込めませんでした。</p></div>`;
       });
   }
 });
